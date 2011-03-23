@@ -66,7 +66,8 @@ void parse(char **cmd)
 		prog[j] = FEND;
 	}
 	while(token != NULL) {
-		if(parse_idx == (prog_stack_size - 10)) {
+		printf("Parse idx: %d\n",parse_idx);
+		if((prog_stack_size - 10) <= parse_idx && parse_idx <= prog_stack_size) {
 			prog = (char *)realloc(prog,sizeof(char) * (prog_stack_size + 10));
 			if(prog == NULL) {
 				fprintf(stderr, "Realloc Error!!\n");
@@ -77,7 +78,9 @@ void parse(char **cmd)
 				for (j = prog_stack_size; j < (prog_stack_size + 10); j++) {
 					prog[j] = FEND;
 				}
+				printf("program size update from: %d",prog_stack_size);
 				prog_stack_size += 10;
+				printf(" to: %d",prog_stack_size);
 			}
 		}
 		if(strcmp(token, "+") == 0) {
@@ -168,13 +171,13 @@ void parse(char **cmd)
 		}
 		else if(strcmp(token, "else") == 0) {
 			prog[parse_idx] = FELSE;
-			prog[(int)pop_if_stack()] = parse_idx + 2;
+			prog[pop_if_stack()] = parse_idx + 2;
 			push_if_stack(parse_idx + 1);
 			parse_idx += 2;
 		}
 		else if(strcmp(token, "then") == 0) {
 			prog[parse_idx] = FTHEN;
-			prog[(int)pop_if_stack()] = parse_idx + 1;
+			prog[pop_if_stack()] = parse_idx + 1;
 			parse_idx++;
 			proc_disable_cnt--;
 		}
