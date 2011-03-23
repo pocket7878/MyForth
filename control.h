@@ -3,8 +3,10 @@
 
 void bye(void);
 //Stack for if then else
-int if_stack[100];
+int if_stack_size;
+int* if_stack;
 int if_pos;
+
 void push_if_stack(int);
 int pop_if_stack(void);
 

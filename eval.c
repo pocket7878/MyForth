@@ -13,14 +13,13 @@ int function_state = 0;
 void eval_prog(void)
 {
 
-	int j;
+	//int j;
 	if(mode == LOAD) {
 		prog_cnt = 0;
 	}
-	printf("Current Prog stack size: %d\n",prog_stack_size);
-	for(j = 0; j < prog_stack_size && !(prog[j - 1] != FCALL && prog[j + 1] == FEND); j++) {
-		printf("Program cnt: %d word: %d\n",j,prog[j]);
-	}
+	//for(j = 0; j < prog_stack_size && !(prog[j - 1] != FCALL && prog[j + 1] == FEND); j++) {
+	//	printf("Program cnt: %d word: %d\n",j,prog[j]);
+	//}
 	while(prog[prog_cnt] != FEND) {
 		if(function_state == 0) {
 			//printf("Top Level\n");
@@ -135,13 +134,11 @@ void eval_prog(void)
 					prog_cnt++;
 					break;
 				case FCALL:
-					printf("FCALL >> PUSH-IF-STACK prog_cnt: %d\n",prog_cnt);
 					push_if_stack(prog_cnt);
 					prog_cnt = prog[prog_cnt + 1];
 					break;
 				case FRET:
 					prog_cnt = pop_if_stack();
-					printf("FRET >> POP-IF-STACK prog_cnt: %d\n",prog_cnt);
 					prog_cnt += 2;
 					break;
 				default:

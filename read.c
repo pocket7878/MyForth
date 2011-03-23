@@ -66,7 +66,6 @@ void parse(char **cmd)
 		prog[j] = FEND;
 	}
 	while(token != NULL) {
-		printf("Parse idx: %d\n",parse_idx);
 		if((prog_stack_size - 10) <= parse_idx && parse_idx <= prog_stack_size) {
 			prog = (char *)realloc(prog,sizeof(char) * (prog_stack_size + 10));
 			if(prog == NULL) {
@@ -78,9 +77,7 @@ void parse(char **cmd)
 				for (j = prog_stack_size; j < (prog_stack_size + 10); j++) {
 					prog[j] = FEND;
 				}
-				printf("program size update from: %d",prog_stack_size);
 				prog_stack_size += 10;
-				printf(" to: %d",prog_stack_size);
 			}
 		}
 		if(strcmp(token, "+") == 0) {
