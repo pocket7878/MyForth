@@ -1,0 +1,51 @@
+#ifndef _PROG_H_
+#define _PROG_H_
+
+//PROGRAM CODES
+enum ePROG{
+	FPOP = 1,
+	FPUSH,
+	FPRINT,
+	FPLUS,
+	FMINUS,
+	FTIMES,
+	FREM,
+	FMOD,
+	FSWAP,
+	FDUP,
+	FDEF,
+	FIF,
+	FELSE,
+	FTHEN,
+	FLESSTHAN,
+	FLESSOREQUAL,
+	FNOTEQUALS,
+	FEQUALS,
+	FGREATERTHAN,
+	FGREATEROREQUAL,
+	FZEROLESSTHAN,
+	FZEROLESSOREQUAL,
+	FZERONOTEQUALS,
+	FZEROEQUALS,
+	FZEROGREATERTHAN,
+	FZEROGREATEROREQUAL,
+	FBYE,
+	FRET,
+	FCALL,
+	FEND = 0,
+};
+
+//Program Stack
+char prog[100];
+int prog_cnt;
+
+//BOOL
+//TRUE: 0 FALSE: -1
+#define TRUE 0
+#define FALSE -1
+//
+#define LOAD 0
+#define REPL 1
+int mode;
+
+#endif
