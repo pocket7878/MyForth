@@ -17,10 +17,7 @@ void greeting(void);
 
 int main(int argc, char** argv) {
 	char *cmd_buf;
-	int j;
-	for (j = 0; j < sizeof(prog) / sizeof(char); j++) {
-		prog[j] = FEND;
-	}
+	
 	//load_stdlib();
 	if(argc >= 2) {
 		mode = LOAD;
@@ -33,6 +30,8 @@ int main(int argc, char** argv) {
 			printf(">>");
 			cmd_buf = readLine();
 			parse(&cmd_buf);
+			//cmb_buf is malloced memory area
+			free(cmd_buf);
 			if(!proc_disable_cnt) {
 				eval_prog();
 			}

@@ -1,4 +1,61 @@
-: squared dup * ;
-5 squared . 
-: fourth-power squared squared ;
-2 fourth-power .
+: foo 4 5 + 8 * . ;
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo
+foo

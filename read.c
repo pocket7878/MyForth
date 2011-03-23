@@ -13,6 +13,7 @@ char proc_diable_cnt = 0;
 int parse_idx = 0;
 
 
+//ファイルからプログラムを読みこんだバッファを返す
 char* load_prog(char *fname)
 {
 	FILE *fp;
@@ -46,13 +47,39 @@ char* load_prog(char *fname)
 }
 
 
+//プログラムが読みこまれたバッファを引数にとり、プログラムスタックに登録する
 void parse(char **cmd)
 {
 	char *token;
 	char adrs;
+	int j;
 	token = strtok(*cmd, sep);
+	if(prog_stack_size == 0) {
+		prog = (char *)malloc(sizeof(char) * 100);
+		if(prog == NULL) {
+			fprintf(stderr, "Malloc Error!!\n");
+			exit(1);
+		}
+		prog_stack_size = 100;
+	}
+	for (j = 0; j < sizeof(prog) / sizeof(char); j++) {
+		prog[j] = FEND;
+	}
 	while(token != NULL) {
-		//printf("[%d]TOKEN: %s\n",parse_idx,token);
+		if(parse_idx == (prog_stack_size - 10)) {
+			prog = (char *)realloc(prog,sizeof(char) * (prog_stack_size + 10));
+			if(prog == NULL) {
+				fprintf(stderr, "Realloc Error!!\n");
+				exit(1);
+			}
+			else {
+				//We must initialize stack
+				for (j = prog_stack_size; j < (prog_stack_size + 10); j++) {
+					prog[j] = FEND;
+				}
+				prog_stack_size += 10;
+			}
+		}
 		if(strcmp(token, "+") == 0) {
 			prog[parse_idx] = FPLUS;
 			parse_idx++;
@@ -230,6 +257,7 @@ int isnum(char *str) {
 	return 1;
 }
 
+//ファイルをバッファに入れて、プログラムスタックにいれるまでを一回でやる関数
 void load_file(char *fname)
 {
 	char *cmd;

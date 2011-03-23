@@ -36,7 +36,10 @@ enum ePROG{
 };
 
 //Program Stack
-char prog[100];
+//char prog[100];
+//int prog_cnt;
+char* prog;
+int prog_stack_size;
 int prog_cnt;
 
 //BOOL
